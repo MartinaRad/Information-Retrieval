@@ -1,4 +1,6 @@
 
+import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -9,18 +11,19 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 public class MyFrame extends JFrame implements ActionListener{
 	
-	JScrollPane scrollPane;
 	JMenuBar menuBar;
 	JMenu fileMenu;
 	JMenu helpMenu;
 	JMenuItem loadItem;
 	JMenuItem searchItem;
 	JMenuItem helpItem;
-	
+	JScrollBar scrollBar;
+	JScrollPane scrollPane;
 	
 	JPanel panel;
 	
@@ -32,7 +35,7 @@ public class MyFrame extends JFrame implements ActionListener{
 		
 		panel = new JPanel();
 		
-		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+		panel.setLayout(new BorderLayout());
 		
 		this.setTitle("Information Retrieval");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,14 +65,13 @@ public class MyFrame extends JFrame implements ActionListener{
 		
 		menuBar.add(fileMenu);
 		menuBar.add(helpMenu);
-
+		
+		//scrollBar = new JScrollBar(JScrollBar.VERTICAL);
+		//scrollPane = new JScrollPane(panel);
+		
+		//scrollPane.add(scrollBar);
 		this.setJMenuBar(menuBar);
-		//this.add(scrollPane);
 		
-
-		
-		panel.add(ResultList.resultPanel);
-		scrollPane = new JScrollPane(panel);
 		
 		this.add(panel);
 		this.pack();
@@ -82,14 +84,16 @@ public class MyFrame extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()== loadItem) {
 			Location location = new Location();
-			
 		}
 
 		if(e.getSource()== searchItem) {
 			System.out.println("Documents from database:");
-			panel.add(SearchText.searchPanel);
+			panel.add(SearchText.searchPanel, BorderLayout.NORTH);
+			panel.add(ResultList.resultPanel, BorderLayout.CENTER);
+			this.add(ResultList.scrollPane, BorderLayout.EAST);
 			this.add(panel);
 			this.pack();
+			this.setSize(1080, 600); //set size after pack
 		}
 
 		if(e.getSource()== helpItem) {

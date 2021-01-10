@@ -1,6 +1,7 @@
 
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -15,8 +16,10 @@ public class SearchText implements ActionListener {
 	JTextField textField;
 	public SearchText() {
 		searchPanel = new JPanel();
+		//searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.PAGE_AXIS));
 		
 		textField = new JTextField();
+		textField.setFont(new Font("Courier", Font.ITALIC, 16));
 		textField.setPreferredSize(new Dimension(500, 40));
 		
 		button = new JButton("Search");
