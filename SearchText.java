@@ -34,8 +34,6 @@ public class SearchText implements ActionListener {
 			System.out.println(snippet);	//to delete
 			button.setEnabled(false);
 			textField.setEnabled(false);
-			//new ResultList();
-			ShowText.textPanel.setVisible(true);
 			ResultList.resultPanel.setVisible(true);
 		}
 	}
