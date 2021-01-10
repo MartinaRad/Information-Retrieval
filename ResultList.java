@@ -1,6 +1,8 @@
 
 
 import java.awt.Font;
+import java.awt.Image;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -9,11 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
-public class ResultList {
+public class ResultList extends SnippetInfo {
 	public static JPanel resultPanel = new JPanel();
 	JLabel label;
+	JLabel titleLabel;
+	ImageIcon icon;
 	JLabel imageLabel;
-	ImageIcon image;
 	JLabel keywordsLabel;
 	JScrollBar scrollBar;
 	public static JScrollPane scrollPane;
@@ -21,42 +24,46 @@ public class ResultList {
 	
 	public ResultList() {
 		resultPanel.setLayout(new BoxLayout(resultPanel, BoxLayout.PAGE_AXIS));
-
+		
+		//Scroll Bar
+		scrollPane = new JScrollPane(resultPanel);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setEnabled(true);
+		scrollPane.setVisible(true);
 		
 		//Top Label:
 		label = new JLabel("Best Results: ");
 		label.setFont(new Font("Courier", Font.BOLD, 18));
 		resultPanel.add(label);
 		
+		int i = 1;
 		
-		//Title:
-		String title = "title example";	//delete later
-
+		ArrayList<SnippetInfo> snippets = SnippetInfo.SnippetInit();
 		
-		//Keywords:
-		keywordsLabel = new JLabel(); //keywords
-		String keywords[] = {"term1", "term2", "term3"};	//delete later
-		String joinString = String.join(", ", keywords);
+		for(SnippetInfo snippet : snippets) {
+			
+			//Title
+			String title = snippet.title;
+			titleLabel = new JLabel(i + ". " + title);
+			titleLabel.setFont(new Font("Courier", Font.BOLD, 18));
+			resultPanel.add(titleLabel);
+			
+			//Image
+			Image img = snippet.img;
+			icon = new ImageIcon(img.getScaledInstance(200, 200, snippet.img.SCALE_REPLICATE));
+			imageLabel = new JLabel(icon);
+			resultPanel.add(imageLabel);
+			
+			//Keywords
+			String listKeywords = String.join(", ", snippet.keywords);
+			keywordsLabel = new JLabel("Keywords: " + listKeywords);
+			keywordsLabel.setFont(new Font("Courier", Font.BOLD + Font.ITALIC, 14));
+			resultPanel.add(keywordsLabel);
+			
+			i++;
+		}
 		
-		keywordsLabel.setText("Keywords: " + joinString);
-		keywordsLabel.setFont(new Font("Courier", Font.BOLD + Font.ITALIC, 14));
-
-		//Image:
-		
-		ImageIcon image = new ImageIcon("C:\\Users\\201217056\\Desktop\\wiki.jpg");
-		imageLabel = new JLabel();
-		imageLabel.setText(title);
-		imageLabel.setIcon(image);
-		imageLabel.setFont(new Font("Courier", Font.BOLD, 18));
-		imageLabel.setHorizontalTextPosition(JLabel.CENTER);
-		imageLabel.setVerticalTextPosition(JLabel.TOP);
-		
-		resultPanel.add(imageLabel);
-		resultPanel.add(keywordsLabel);
-		
-		scrollPane = new JScrollPane(resultPanel);
-		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
 		resultPanel.setVisible(false);
 	}
 }

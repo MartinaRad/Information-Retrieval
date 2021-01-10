@@ -1,11 +1,9 @@
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -66,10 +64,6 @@ public class MyFrame extends JFrame implements ActionListener{
 		menuBar.add(fileMenu);
 		menuBar.add(helpMenu);
 		
-		//scrollBar = new JScrollBar(JScrollBar.VERTICAL);
-		//scrollPane = new JScrollPane(panel);
-		
-		//scrollPane.add(scrollBar);
 		this.setJMenuBar(menuBar);
 		
 		
@@ -85,19 +79,17 @@ public class MyFrame extends JFrame implements ActionListener{
 		if(e.getSource()== loadItem) {
 			Location location = new Location();
 		}
-
 		if(e.getSource()== searchItem) {
-			System.out.println("Documents from database:");
-			panel.add(SearchText.searchPanel, BorderLayout.NORTH);
-			panel.add(ResultList.resultPanel, BorderLayout.CENTER);
-			this.add(ResultList.scrollPane, BorderLayout.EAST);
-			this.add(panel);
-			this.pack();
-			this.setSize(1080, 600); //set size after pack
+				panel.add(SearchText.searchPanel, BorderLayout.NORTH);
+				panel.add(ResultList.scrollPane, BorderLayout.CENTER);
+				this.add(panel);
+				this.pack();
+				this.setSize(1080, 600); //set size after pack
 		}
-
+		
 		if(e.getSource()== helpItem) {
 			new NewWindow();
 		}
 	}
+
 }

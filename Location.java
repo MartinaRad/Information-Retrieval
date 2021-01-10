@@ -22,7 +22,6 @@ public class Location {
 		this.location = location;
 		this.Index_Path = Index_Path;
 		}
-
 	}
 	
 	public static String foldercr(String dir) {
