@@ -13,11 +13,8 @@ public class Location {
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		int response = fileChooser.showOpenDialog(null);
 		if(response == JFileChooser.APPROVE_OPTION) {
-			location = fileChooser.getSelectedFile();
-			//location = file.getAbsolutePath(); //file directory
-			System.out.println(location);	
+			location = fileChooser.getSelectedFile();	
 			Index_Path = foldercr(System.getProperty("user.dir"));	//index directory
-			System.out.println(Index_Path);
 			
 		this.location = location;
 		this.Index_Path = Index_Path;

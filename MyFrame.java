@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -52,7 +51,7 @@ public class MyFrame extends JFrame implements ActionListener{
 		helpMenu = new JMenu("Help");
 		
 		loadItem = new JMenuItem("Choose Folder");
-		searchItem = new JMenuItem("Search");
+		searchItem = new JMenuItem("New Search");
 		helpItem = new JMenuItem("Help");
 		
 		loadItem.addActionListener(this);
@@ -74,9 +73,9 @@ public class MyFrame extends JFrame implements ActionListener{
 		
 		this.setJMenuBar(menuBar);
 		
+		
 		searchPanel = new JPanel();
-		
-		
+			
 		textField = new JTextField();
 		textField.setFont(new Font("Courier", Font.ITALIC, 16));
 		textField.setPreferredSize(new Dimension(500, 40));
@@ -99,20 +98,18 @@ public class MyFrame extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()== loadItem) {
-			Location location = new Location();
-			locationFlag = true;
-			System.out.println(locationFlag);
+			new Location();
 			UI.initUI();
-			
 			}
-		/*if(e.getSource()== searchItem) {
-			
-		}*/
+		if(e.getSource()== searchItem) {
+			panel.remove(ResultList.scrollPane);
+			this.pack();
+			this.setSize(1080, 600);
+		}
 		if(e.getSource()==button)
 		{
 			snippet = textField.getText();
 			searchFlag = true;
-			
 			new ResultList();
 			panel.add(ResultList.scrollPane, BorderLayout.CENTER);
 			this.pack();

@@ -12,7 +12,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 public class ResultList extends SnippetInfo2 {
-	public static JPanel resultPanel = new JPanel();
+	JPanel resultPanel = new JPanel();
 	JLabel label;
 	JLabel titleLabel;
 	ImageIcon icon;
@@ -38,17 +38,9 @@ public class ResultList extends SnippetInfo2 {
 		resultPanel.add(label);
 		
 		int i = 1;
-		System.out.println("wtf");
 		LuceneAO lucene = new LuceneAO(UI.indexPath, UI.filesPath);
-		//String query = UI.getQuery();
-		
-		
-		
+
 		ArrayList<SnippetInfo> snippets = lucene.search(MyFrame.snippet);
-		
-		for(SnippetInfo snippet : snippets) {
-			System.out.println(snippet.title);
-		}
 		for(SnippetInfo snippet : snippets) {
 
 			//Title
@@ -56,7 +48,6 @@ public class ResultList extends SnippetInfo2 {
 			titleLabel = new JLabel(i + ". " + title);
 			titleLabel.setFont(new Font("Courier", Font.BOLD, 18));
 			resultPanel.add(titleLabel);
-			System.out.println(title);
 				
 			//Image
 			Image img = snippet.img;
@@ -75,6 +66,5 @@ public class ResultList extends SnippetInfo2 {
 		
 		resultPanel.setVisible(true);
 		lucene.close();
-		
 	}
 }
