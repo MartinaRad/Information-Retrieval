@@ -34,19 +34,16 @@ public class MyFrame extends JFrame implements ActionListener{
 	JButton button;
 	JTextField textField;
 	static boolean locationFlag = false;
-	static boolean searchFlag = false;
 	MyFrame(){
-		new SearchText();
-		
-		
-		panel = new JPanel();
-		
-		panel.setLayout(new BorderLayout());
-		
 		this.setTitle("Information Retrieval");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(true);
-
+		
+		//create Panel in the main Frame:
+		panel = new JPanel();
+		panel.setLayout(new BorderLayout());
+		
+		//create Menu Bar Buttons:
 		menuBar = new JMenuBar();
 		fileMenu = new JMenu("File");
 		helpMenu = new JMenu("Help");
@@ -71,12 +68,11 @@ public class MyFrame extends JFrame implements ActionListener{
 		
 		menuBar.add(fileMenu);
 		menuBar.add(helpMenu);
-		
 		this.setJMenuBar(menuBar);
 		
-		
+		//create new Panel for Search Field
 		searchPanel = new JPanel();
-			
+		
 		textField = new JTextField();
 		textField.setFont(new Font("Courier", Font.ITALIC, 16));
 		textField.setPreferredSize(new Dimension(500, 40));
@@ -88,9 +84,8 @@ public class MyFrame extends JFrame implements ActionListener{
 		searchPanel.add(textField);
 		searchPanel.add(button);
 		
-		
-		panel.add(searchPanel, BorderLayout.NORTH);
-		this.add(panel);
+		panel.add(searchPanel, BorderLayout.NORTH);	//add the search panel to the main frame panel
+		this.add(panel);	//add main frame panel to main frame
 		this.pack();
 		this.setSize(1080, 600); //set size after pack
 		this.setVisible(true); //make frame visible	
@@ -99,27 +94,27 @@ public class MyFrame extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()== loadItem) {
-			new Location();
+			new Location();	//enter new location
 			UI.initUI();
 			}
 		if(e.getSource()== searchItem) {
-			panel.remove(ResultList.scrollPane);
+			panel.remove(ResultList.scrollPane);	//deletes result panel, so a new search can be made
 			this.pack();
 			this.setSize(1080, 600);
 		}
 		if(e.getSource()==button)
 		{
-			if(locationFlag)
+			if(locationFlag)	//location has to be true
 				{
-					snippet = textField.getText();
-					new ResultList();
-					panel.add(ResultList.scrollPane, BorderLayout.CENTER);
+					snippet = textField.getText();	//query
+					new ResultList();	//calls results
+					panel.add(ResultList.scrollPane, BorderLayout.CENTER);	//adds result panel to main panel
 					this.pack();
 					this.setSize(1080, 600);
 				}
 			else
 			{
-				JOptionPane.showMessageDialog(button, "Enter File Directory!", "Error", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(button, "Enter File Directory!", "Error", JOptionPane.PLAIN_MESSAGE);	//error message if location is wrong
 			}
 		}
 		if(e.getSource()== helpItem) {

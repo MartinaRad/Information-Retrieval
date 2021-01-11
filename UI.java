@@ -19,6 +19,7 @@ public class UI {
 	 */
 	public static void initUI() {
 		initPaths();
+		MyFrame.locationFlag = true;
 	}
 	
 	/*
