@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
-public class ResultList extends SnippetInfo {
+public class ResultList extends SnippetInfo2 {
 	public static JPanel resultPanel = new JPanel();
 	JLabel label;
 	JLabel titleLabel;
@@ -38,32 +38,43 @@ public class ResultList extends SnippetInfo {
 		resultPanel.add(label);
 		
 		int i = 1;
+		System.out.println("wtf");
+		LuceneAO lucene = new LuceneAO(UI.indexPath, UI.filesPath);
+		//String query = UI.getQuery();
 		
-		ArrayList<SnippetInfo> snippets = SnippetInfo.SnippetInit();
+		
+		
+		ArrayList<SnippetInfo> snippets = lucene.search(MyFrame.snippet);
 		
 		for(SnippetInfo snippet : snippets) {
-			
+			System.out.println(snippet.title);
+		}
+		for(SnippetInfo snippet : snippets) {
+
 			//Title
 			String title = snippet.title;
 			titleLabel = new JLabel(i + ". " + title);
 			titleLabel.setFont(new Font("Courier", Font.BOLD, 18));
 			resultPanel.add(titleLabel);
-			
+			System.out.println(title);
+				
 			//Image
 			Image img = snippet.img;
 			icon = new ImageIcon(img.getScaledInstance(200, 200, snippet.img.SCALE_REPLICATE));
 			imageLabel = new JLabel(icon);
 			resultPanel.add(imageLabel);
-			
+				
 			//Keywords
 			String listKeywords = String.join(", ", snippet.keywords);
 			keywordsLabel = new JLabel("Keywords: " + listKeywords);
 			keywordsLabel.setFont(new Font("Courier", Font.BOLD + Font.ITALIC, 14));
 			resultPanel.add(keywordsLabel);
-			
+				
 			i++;
-		}
+			}
 		
-		resultPanel.setVisible(false);
+		resultPanel.setVisible(true);
+		lucene.close();
+		
 	}
 }
