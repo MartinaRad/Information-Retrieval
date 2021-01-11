@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -28,9 +29,9 @@ public class MyFrame extends JFrame implements ActionListener{
 	JScrollPane scrollPane;
 	
 	static JPanel panel;
-	public static JPanel searchPanel;
+	JPanel searchPanel;
 	static String snippet;
-	static JButton button;
+	JButton button;
 	JTextField textField;
 	static boolean locationFlag = false;
 	static boolean searchFlag = false;
@@ -108,15 +109,21 @@ public class MyFrame extends JFrame implements ActionListener{
 		}
 		if(e.getSource()==button)
 		{
-			snippet = textField.getText();
-			searchFlag = true;
-			new ResultList();
-			panel.add(ResultList.scrollPane, BorderLayout.CENTER);
-			this.pack();
-			this.setSize(1080, 600);
+			if(locationFlag)
+				{
+					snippet = textField.getText();
+					new ResultList();
+					panel.add(ResultList.scrollPane, BorderLayout.CENTER);
+					this.pack();
+					this.setSize(1080, 600);
+				}
+			else
+			{
+				JOptionPane.showMessageDialog(button, "Enter File Directory!", "Error", JOptionPane.PLAIN_MESSAGE);
+			}
 		}
 		if(e.getSource()== helpItem) {
-			new NewWindow();
+			new HelpWindow();
 		}
 	}
 
