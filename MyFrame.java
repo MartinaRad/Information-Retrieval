@@ -23,7 +23,6 @@ public class MyFrame extends JFrame implements ActionListener{
 	JMenu fileMenu;
 	JMenu helpMenu;
 	JMenuItem loadItem;
-	JMenuItem searchItem;
 	JMenuItem helpItem;
 	JScrollBar scrollBar;
 	JScrollPane scrollPane;
@@ -45,29 +44,19 @@ public class MyFrame extends JFrame implements ActionListener{
 		
 		//create Menu Bar Buttons:
 		menuBar = new JMenuBar();
-		fileMenu = new JMenu("File");
-		helpMenu = new JMenu("Help");
 		
 		loadItem = new JMenuItem("Choose Folder");
-		searchItem = new JMenuItem("New Search");
 		helpItem = new JMenuItem("Help");
 		
 		loadItem.addActionListener(this);
-		searchItem.addActionListener(this);
 		helpItem.addActionListener(this);
 		
-		fileMenu.setMnemonic(KeyEvent.VK_F); // Alt + f
 		loadItem.setMnemonic(KeyEvent.VK_C); // Alt + C
-		searchItem.setMnemonic(KeyEvent.VK_S); // Alt + s
-		helpMenu.setMnemonic(KeyEvent.VK_H); // Alt + h
 		helpItem.setMnemonic(KeyEvent.VK_H); // Alt + h
 		
-		fileMenu.add(loadItem);
-		fileMenu.add(searchItem);
-		helpMenu.add(helpItem);
+		menuBar.add(loadItem);
+		menuBar.add(helpItem);
 		
-		menuBar.add(fileMenu);
-		menuBar.add(helpMenu);
 		this.setJMenuBar(menuBar);
 		
 		//create new Panel for Search Field
@@ -88,24 +77,26 @@ public class MyFrame extends JFrame implements ActionListener{
 		this.add(panel);	//add main frame panel to main frame
 		this.pack();
 		this.setSize(1080, 600); //set size after pack
-		this.setVisible(true); //make frame visible	
+		this.setVisible(true); 
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()== loadItem) {
 			new Location();	//enter new location
-			UI.initUI();
 			}
-		if(e.getSource()== searchItem) {
-			panel.remove(ResultList.scrollPane);	//deletes result panel, so a new search can be made
-			this.pack();
-			this.setSize(1080, 600);
-		}
+
 		if(e.getSource()==button)
 		{
 			if(locationFlag)	//location has to be true
 				{
+				if (ResultList.isDrawn) {
+					panel.remove(ResultList.scrollPane);	//deletes result panel, so a new search can be made
+					this.pack();
+					this.setSize(1080, 600);
+					ResultList.isDrawn = false; 
+					
+				}
 					snippet = textField.getText();	//query
 					new ResultList();	//calls results
 					panel.add(ResultList.scrollPane, BorderLayout.CENTER);	//adds result panel to main panel
@@ -118,7 +109,8 @@ public class MyFrame extends JFrame implements ActionListener{
 			}
 		}
 		if(e.getSource()== helpItem) {
-			new HelpWindow();
+			JOptionPane.showMessageDialog(panel, "1. Choose Directory Containg File to be Indexed (Choose Folder).\n"
+			+ "2. Type Search Query.");
 		}
 	}
 
