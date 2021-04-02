@@ -15,9 +15,12 @@ public class Location {
 		if(response == JFileChooser.APPROVE_OPTION) {
 			location = fileChooser.getSelectedFile();	
 			Index_Path = foldercr(System.getProperty("user.dir"));	//index directory
-			
+			UI.initUI();
 		this.location = location;
 		this.Index_Path = Index_Path;
+		}
+		if(response == JFileChooser.CANCEL_OPTION) {
+			MyFrame.locationFlag = false;
 		}
 	}
 	
