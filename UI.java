@@ -18,8 +18,7 @@ public class UI {
 	 * Take type of File we want to index and call initPaths() 
 	 */
 	public static void initUI() {
-		initPaths();
-		MyFrame.locationFlag = true;
+			initPaths();
 	}
 	
 	/*
@@ -34,6 +33,7 @@ public class UI {
 			if(!dir.exists()) {
 				System.out.println("False path");
 			}else {
+				MyFrame.locationFlag = true;
 				indexPath = dir.toPath();
 				valid= true;
 			}
@@ -46,6 +46,7 @@ public class UI {
 			if(!dir.exists()) {
 				System.out.println("False path");
 			}else {
+				MyFrame.locationFlag = true;
 				filesPath = dir.toPath();
 				valid= true;
 			}
