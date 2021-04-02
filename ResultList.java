@@ -15,7 +15,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 
-public class ResultList extends SnippetInfo2 {
+public class ResultList{
 	JPanel resultPanel = new JPanel();
 	JLabel label;
 	JLabel titleLabel;
@@ -23,6 +23,7 @@ public class ResultList extends SnippetInfo2 {
 	JLabel imageLabel;
 	JLabel keywordsLabel;
 	JScrollBar scrollBar;
+	public static boolean isDrawn=false; 
 	public static JScrollPane scrollPane;
 	
 	
@@ -59,7 +60,8 @@ public class ResultList extends SnippetInfo2 {
 
 				//Title
 				String title = snippet.title;
-				titleLabel = new JLabel(i + ". " + title);
+				title = title.replace(".txt", "");
+				titleLabel = new JLabel(i + ". " + title + "");
 				titleLabel.setFont(new Font("Courier", Font.BOLD, 18));
 				resultPanel.add(titleLabel);
 				
@@ -80,9 +82,10 @@ public class ResultList extends SnippetInfo2 {
 				
 				i++;
 			}
-		
+		 
 		resultPanel.setVisible(true);
 		}
+		isDrawn = true;
 		lucene.close();
 	}
 }
